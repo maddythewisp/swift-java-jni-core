@@ -12,6 +12,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-extension UnsafeMutablePointer<JNIEnv?> {
+extension UnsafeMutablePointer<CJNIEnv?> {
   public var interface: JNINativeInterface { self.pointee!.pointee }
 }

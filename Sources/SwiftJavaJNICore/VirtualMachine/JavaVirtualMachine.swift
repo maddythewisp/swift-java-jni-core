@@ -32,7 +32,7 @@ import Darwin
 #endif
 
 public typealias JavaVMPointer = UnsafeMutablePointer<JavaVM?>
-typealias JNIEnvPointer = UnsafeMutablePointer<JNIEnv?>
+typealias JNIEnvPointer = UnsafeMutablePointer<CJNIEnv?>
 
 extension FileManager {
   #if os(Windows)

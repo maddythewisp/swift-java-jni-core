@@ -508,3 +508,43 @@ __attribute__ ((visibility ("default"))) void JNI_OnUnload(JavaVM* vm, void* res
 #define JNI_ABORT       2
 
 #endif
+
+// ---------------------------------------------------------------------------
+// C-compatible JNI type aliases for Swift C++ interoperability.
+// A cxx-interop Swift target parses <jni.h> in C++ mode, where JNIEnv/jobject
+// become classes; these aliases pin the C-ABI pointer shapes the generated
+// thunks expect, regardless of interop mode. See swiftlang/swift-java#391.
+// ---------------------------------------------------------------------------
+#if defined(__cplusplus) && defined(__ANDROID__)
+typedef const struct JNINativeInterface* CJNIEnv;
+typedef _jobject*       Cjobject;
+typedef _jclass*        Cjclass;
+typedef _jstring*       Cjstring;
+typedef _jarray*        Cjarray;
+typedef _jobjectArray*  CjobjectArray;
+typedef _jbooleanArray* CjbooleanArray;
+typedef _jbyteArray*    CjbyteArray;
+typedef _jcharArray*    CjcharArray;
+typedef _jshortArray*   CjshortArray;
+typedef _jintArray*     CjintArray;
+typedef _jlongArray*    CjlongArray;
+typedef _jfloatArray*   CjfloatArray;
+typedef _jdoubleArray*  CjdoubleArray;
+typedef _jthrowable*    Cjthrowable;
+#else
+typedef JNIEnv        CJNIEnv;
+typedef jobject       Cjobject;
+typedef jclass        Cjclass;
+typedef jstring       Cjstring;
+typedef jarray        Cjarray;
+typedef jobjectArray  CjobjectArray;
+typedef jbooleanArray CjbooleanArray;
+typedef jbyteArray    CjbyteArray;
+typedef jcharArray    CjcharArray;
+typedef jshortArray   CjshortArray;
+typedef jintArray     CjintArray;
+typedef jlongArray    CjlongArray;
+typedef jfloatArray   CjfloatArray;
+typedef jdoubleArray  CjdoubleArray;
+typedef jthrowable    Cjthrowable;
+#endif

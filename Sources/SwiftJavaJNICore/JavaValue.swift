@@ -91,7 +91,7 @@ public protocol JavaValue: ~Copyable {
 }
 
 /// The JNI environment.
-public typealias JNIEnvironment = UnsafeMutablePointer<JNIEnv?>
+public typealias JNIEnvironment = UnsafeMutablePointer<CJNIEnv?>
 
 /// Type of an operation that performs a JNI method call.
 public typealias JNIMethodCall<Result> = (JNIEnvironment, jobject, jmethodID, UnsafePointer<jvalue>?) -> Result

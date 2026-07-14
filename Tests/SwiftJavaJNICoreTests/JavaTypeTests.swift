@@ -43,4 +43,19 @@ struct JavaTypeTests {
   func description(javaType: JavaType, expected: String) throws {
     #expect(javaType.description == expected)
   }
+
+  @Test(
+    arguments: [
+      (.int, "jint"),
+      (.array(.byte), "CjbyteArray?"),
+      (.array(.class(package: "java.lang", name: "String")), "CjobjectArray?"),
+      (.class(package: "java.lang", name: "String"), "Cjstring?"),
+      (.class(package: "java.lang", name: "Class"), "Cjclass?"),
+      (.class(package: "java.lang", name: "Throwable"), "Cjthrowable?"),
+      (.class(package: "example", name: "Widget"), "Cjobject?"),
+    ] as [(JavaType, String)]
+  )
+  func cxxInteropInvariantJNIName(javaType: JavaType, expected: String) {
+    #expect(javaType.jniTypeName == expected)
+  }
 }
